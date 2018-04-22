@@ -348,7 +348,7 @@ void Run()
 
 
 
-main()
+int main()
 {
 	
 	freopen( "input.txt",  "r", stdin  );
