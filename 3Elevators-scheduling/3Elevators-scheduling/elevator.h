@@ -73,7 +73,7 @@ class Elevator_3
 				
 				void Catch( Passenger &cur_man, int dir_P, int name );
 				//catch someone in
-				void Print( int cur_time, int cur_floor, int name, Passenger now );
+				void Print( int cur_time, int cur_floor, int name, Passenger now, char* argv[] );
 				
 	public:
 				vector<Passenger> All;
@@ -81,7 +81,7 @@ class Elevator_3
 		
 				Elevator_3();
 				~Elevator_3();
-				void Scan( int cur_time, int cur_floor, int dir_E, int name );
+				void Scan( int cur_time, int cur_floor, int dir_E, int name, char* argv[] );
 				//decide where to go and how to go 
 				void Run( int cur_time, int cur_floor, Passenger now );
 				//goto somefloor to pick up someone or send someone

@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <vector>
+#include <fstream>
 #include "elevator.h"
 using namespace std;
 
@@ -43,9 +44,39 @@ void Get( int n )
 	}
 }
 
-int main()
+int judge( int argc )
 {
-	freopen("input.txt", "r", stdin);
+	/*if ( argc == 0 )
+	{
+		cout << "There is no operations" << endl;
+		return 0;
+	} 
+	else*/ if ( argc == 1 )
+	{
+		cout << "There is no input which should like:input.txt..." << endl;
+		return 0; 
+	}
+	else if ( argc < 5 )
+	{
+		cout << "There lack some output txt" << endl;
+		return 0;
+	}
+}
+
+int main( int argc, char* argv[] )
+{
+	
+	if ( !judge(argc) ) return 0;
+	
+	ifstream fin(argv[1]);
+	if ( !fin )
+	{
+		cout << "There is no such txt exist, it's name:" << argv[1] << endl;
+		return 0;
+	}
+	
+	argv[2] = "output1.txt"; argv[3] = "output2.txt"; argv[4] = "output3.txt";
+	freopen(argv[1], "r", stdin);
 	int n;
 	cin >> n;
 	
@@ -57,28 +88,28 @@ int main()
 	
 //	如果该电梯的需求数组不为空，则运行该电梯 
 	if ( Lift_1.All.size() != 0 )
-		Lift_1.Scan( 0, 1, 1, 1 );
+		Lift_1.Scan( 0, 1, 1, 1, argv );
 	else
 	{
-		freopen("output1.txt", "w", stdout);
+		freopen(argv[2], "w", stdout);
 		
 		fclose(stdout);
 	}
 		
 	if ( Lift_2.All.size() != 0 )
-		Lift_2.Scan( 0, 1, 1, 2 );
+		Lift_2.Scan( 0, 1, 1, 2, argv );
 	else
 	{
-		freopen("output2.txt", "w", stdout);
+		freopen(argv[3], "w", stdout);
 		
 		fclose(stdout);
 	}
 		
 	if ( Lift_3.All.size() != 0 )
-		Lift_3.Scan( 0, 1, 1, 3 );
+		Lift_3.Scan( 0, 1, 1, 3, argv );
 	else
 	{
-		freopen("output3.txt", "w", stdout);
+		freopen(argv[4], "w", stdout);
 		
 		fclose(stdout);
 	}

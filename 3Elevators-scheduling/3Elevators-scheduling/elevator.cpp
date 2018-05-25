@@ -26,28 +26,28 @@ Elevator_3::Elevator_3()
 }
 Elevator_3::~Elevator_3(){}
 
-void Elevator_3::Print( int cur_time, int cur_floor, int name, Passenger now )
+void Elevator_3::Print( int cur_time, int cur_floor, int name, Passenger now, char* argv[] )
 {
 	//判断在哪个文件输出 
 	if ( name == 1 )
 	{
 		print_1 ++;
-		if ( print_1 == 1 ) freopen("output1.txt", "w", stdout);
-		else freopen("output1.txt", "a", stdout);
+		if ( print_1 == 1 ) freopen(argv[2], "w", stdout);
+		else freopen(argv[2], "a", stdout);
 		cout << cur_time << " " << cur_floor << endl; //<< now.id << endl;
 	}
 	if ( name == 2 )
 	{
 		print_2 ++;
-		if ( print_2 == 1 ) freopen("output2.txt", "w", stdout);
-		else freopen("output2.txt", "a", stdout);
+		if ( print_2 == 1 ) freopen(argv[3], "w", stdout);
+		else freopen(argv[3], "a", stdout);
 		cout << cur_time << " " << cur_floor << endl; //<< now.id << endl;
 	}
 	if ( name == 3 )
 	{
 		print_3 ++;
-		if ( print_3 == 1 ) freopen("output3.txt", "w", stdout);
-		else freopen("output3.txt", "a", stdout);
+		if ( print_3 == 1 ) freopen(argv[4], "w", stdout);
+		else freopen(argv[4], "a", stdout);
 		cout << cur_time << " " << cur_floor << endl; //<< now.id << endl;
 	}
 }
@@ -83,7 +83,7 @@ int Elevator_3::send( int cur_floor, Passenger now )
 }
 
 //扫描请求，并且运行电梯 
-void Elevator_3::Scan( int cur_time, int cur_floor, int dir_E, int name )
+void Elevator_3::Scan( int cur_time, int cur_floor, int dir_E, int name, char* argv[] )
 {
 	int cnt_out = 0;
 	
@@ -120,7 +120,7 @@ void Elevator_3::Scan( int cur_time, int cur_floor, int dir_E, int name )
 				if ( tmp_man.id == -1 ) tmp_man = All[i];
 //				tmp_man为电梯中最先进入的乘客，如果其id==-1说明其已出电梯，可以向下一个人的需求移动 
 				All[i].in = 1;
-				Print( cur_time, cur_floor, name, All[i] );
+				Print( cur_time, cur_floor, name, All[i], argv );
 				cur_time ++;
 				sum_men ++;
 			}
@@ -128,7 +128,7 @@ void Elevator_3::Scan( int cur_time, int cur_floor, int dir_E, int name )
 			else if ( send( cur_floor, All[i]) )
 			{
 				All[i].out = 1;
-				Print( cur_time, cur_floor, name, All[i] );
+				Print( cur_time, cur_floor, name, All[i], argv );
 				cur_time ++;
 				cnt_out ++;
 				sum_men --;
